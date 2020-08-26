@@ -7,9 +7,9 @@ properties([
    ])
 ])
 
-def label = "TT-reference-upload-${UUID.randomUUID().toString()}"
+
 timestamps{
-       node(label){
+       node(master){
             try{
 
                 stage('Checkout SCM'){
