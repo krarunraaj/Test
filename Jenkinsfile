@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Import TT Data') {
       steps {
-        load 'sdfs.groovy'
+        echo "KRAR"
       }
     }
 
