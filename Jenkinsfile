@@ -18,11 +18,8 @@ timestamps{
                 }
 
                 stage('Download excel'){
-
-                                script
-                                        {
-                                         // sh "wget -O inputexcel.xls ${IMPORT_DATA_URL}"
-                                        }
+                  echo ${filePath}
+                               
 
                 }
 
