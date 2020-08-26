@@ -11,7 +11,7 @@ properties([
 timestamps{
        node('master'){
             try{
-
+                deleteDir()
                 stage('Checkout SCM'){
                     checkout scm
                  
