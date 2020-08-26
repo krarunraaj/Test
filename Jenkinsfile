@@ -19,7 +19,8 @@ pipeline {
          script 
          {
            echo "${filePath}"
-           echo "${jar}"
+           echo "Printing the ls"
+           ls
      }
        }
      }
