@@ -5,8 +5,7 @@ properties([
 ])
 
 
-git branch: 'master',
-    url: 'git@github.com:krarunraaj/Training.git'
+
 
 
 pipeline {
@@ -15,6 +14,8 @@ pipeline {
   stages {
     stage('Import TT Data') {
       steps {
+        git branch: 'master',
+    url: 'git@github.com:krarunraaj/Training.git'
         echo "KRAR"
       }
     }
