@@ -9,7 +9,7 @@ properties([
 
 
 timestamps{
-       node(master){
+       node('master'){
             try{
 
                 stage('Checkout SCM'){
