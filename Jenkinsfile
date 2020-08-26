@@ -1,6 +1,8 @@
 properties([
   parameters([
-    string(name: 'DEPLOY_ENV', defaultValue: 'TESTING', description: 'The target environment', )
+    string(name: 'Branch', defaultValue: 'master', description: 'The target environment' ),
+    string(name: 'filePath', defaultValue: 'TESTING', description: 'Input excel file location in git' ),
+    string(name: 'jar', defaultValue: 'JAR', description: 'Executable jar location in git' )
    ])
 ])
 
