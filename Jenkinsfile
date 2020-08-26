@@ -14,17 +14,14 @@ timestamps{
 
                 stage('Checkout SCM'){
                     checkout scm
-                    // install jq here, we need in C1 cleanup
-                    env.PATH = "/usr/bin/jq:${env.PATH}"
-                    sh "chmod a+x lib/jq-linux64"
-                    sh "cp lib/jq-linux64 /usr/bin/jq"
+                 
                 }
 
                 stage('Download excel'){
 
                                 script
                                         {
-                                          sh "wget -O inputexcel.xls ${IMPORT_DATA_URL}"
+                                         // sh "wget -O inputexcel.xls ${IMPORT_DATA_URL}"
                                         }
 
                 }
@@ -32,14 +29,14 @@ timestamps{
                 stage('Download jar'){
                     script
                             {
-                                sh "wget -O utility.jar  ${IMPORT_JAR}"
+                              //  sh "wget -O utility.jar  ${IMPORT_JAR}"
                             }
                 }
 
                 stage('Execute utility to upload'){
                     script
                             {
-                                sh "java -jar  utility.jar -O inputexcel.xls"
+                              //  sh "java -jar  utility.jar -O inputexcel.xls"
                             }
 
                 }
@@ -48,7 +45,7 @@ timestamps{
 
 
 
-                currentBuild.result='SUCCESS'
+              //  currentBuild.result='SUCCESS'
 
             } catch (err){
 
