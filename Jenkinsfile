@@ -10,7 +10,15 @@ pipeline {
    
    stages {
        
-        stage('EnterUserInput') {
+     stage('Validate')
+     {
+        def inputFile = input message: 'Upload file', parameters: [file(name: 'data.zip')]
+        new hudson.FilePath(new File("$workspace/data.zip")).copyFrom(inputFile)
+        inputFile.delete()
+     }
+     
+     
+      /*  stage('EnterUserInput') {
          steps {
              script {
                  
@@ -40,6 +48,6 @@ pipeline {
                         
          }
       }
-       
+    */   
    }
   }
