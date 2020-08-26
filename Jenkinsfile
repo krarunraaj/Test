@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage('Import TT Data') {
       steps {
-        git branch: 'master',
+        git branch: 'master', credentialsId: '06:61:54:53:2c:28:fc:66:45:b9:0b:db:78:bf:38:d1' ,
     url: 'git@github.com:krarunraaj/Training.git'
         echo "KRAR"
       }
