@@ -18,7 +18,8 @@ pipeline {
        {
          script 
          {
-      echo "valid"
+           echo "${filePath}"
+           echo "${jar}"
      }
        }
      }
