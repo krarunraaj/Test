@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 properties([
   parameters([
     string(name: 'Branch', defaultValue: 'master', description: 'The target environment' ),
@@ -6,56 +7,54 @@ properties([
    ])
 ])
 
+def label = "TT-reference-upload-${UUID.randomUUID().toString()}"
+timestamps{
+    podTemplate(label: label, cloud: "openshift", namespace: 'ci', inheritFrom:'maven', serviceAccount:"project-automation"){
+        node(label){
+            try{
 
-pipeline {
-   agent any
-   
-   stages {
-       
-     stage('Validate')
-     {
-       steps
-       {
-         script 
-         {
-           echo "${filePath}"
-           echo "Printing the ls"
-           ls
-     }
-       }
-     }
-     
-     
-      /*  stage('EnterUserInput') {
-         steps {
-             script {
-                 
-                 def userInputTxt = input(
-                                     id: 'inputTextbox', message: 'Please enter JOB Description', parameters: [
-                                     [$class: 'TextParameterDefinition', description: 'String or Integer etc..',name: 'input']
-                                    ])
-                    echo ("JOB Description is: ${userInputTxt}")
-                     
-             }}   
+                stage('Checkout SCM'){
+                    checkout scm
+                    // install jq here, we need in C1 cleanup
+                    env.PATH = "/usr/bin/jq:${env.PATH}"
+                    sh "chmod a+x lib/jq-linux64"
+                    sh "cp lib/jq-linux64 /usr/bin/jq"
+                }
+
+                stage('Download excel'){
+
+                                script
+                                        {
+                                          sh "wget -O inputexcel.xls ${IMPORT_DATA_URL}"
+                                        }
+
+                }
+
+                stage('Download jar'){
+                    script
+                            {
+                                sh "wget -O utility.jar  ${IMPORT_JAR}"
+                            }
+                }
+
+                stage('Execute utility to upload'){
+                    script
+                            {
+                                sh "java -jar  utility.jar -O inputexcel.xls"
+                            }
+
+                }
+
+
+
+
+
+                currentBuild.result='SUCCESS'
+
+            } catch (err){
+
+                throw err
+            }
         }
-        
-         stage('Upload a CSV') {
-         steps {
-             script {
-                 
-                        def inputCSVPath = input message: 'Upload file', parameters: [file(name: 'Test.csv', description: 'Upload only CSV file')]
-                        def csvContent = readFile "${inputCSVPath}"
-                        
-                         echo ("CSV FILE PATH IS : ${inputCSVPath}")
-                         echo("CSV CONTENT IS: ${csvContent}") 
-        }
-                 
-                 echo env.STAGE_NAME
-                 echo '=========== Upload a CSV =============='
-                
-                        
-         }
-      }
-    */   
-   }
-  }
+    }
+}
