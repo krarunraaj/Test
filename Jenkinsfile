@@ -18,7 +18,7 @@ timestamps{
                 }
 
                 stage('Download excel'){
-                  echo ${filePath}
+                  echo env.filePath
                                
 
                 }
