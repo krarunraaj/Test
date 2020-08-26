@@ -4,6 +4,11 @@ properties([
    ])
 ])
 
+
+git branch: 'master',
+    url: 'git@github.com:krarunraaj/Training.git'
+
+
 pipeline {
   agent any
   
