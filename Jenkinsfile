@@ -9,8 +9,7 @@ properties([
 
 def label = "TT-reference-upload-${UUID.randomUUID().toString()}"
 timestamps{
-    podTemplate(label: label, cloud: "openshift", namespace: 'ci', inheritFrom:'maven', serviceAccount:"project-automation"){
-        node(label){
+       node(label){
             try{
 
                 stage('Checkout SCM'){
