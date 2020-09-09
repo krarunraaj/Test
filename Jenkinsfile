@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 properties([
   parameters([
-    string(name: 'Branch', defaultValue: 'master', description: 'The target environment' ),
+    text(name: 'Branch', defaultValue: 'master', description: 'The target environment' ),
     file(name: 'filePath', defaultValue: 'TESTING', description: 'Input excel file location in git' ),
     string(name: 'jar', defaultValue: 'JAR', description: 'Executable jar location in git' )
    ])
